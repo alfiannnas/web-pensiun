@@ -1,6 +1,14 @@
 <?php 
 include "./database.php";
 
+session_start();
+
+// Jika pengguna belum login, arahkan kembali ke halaman login
+if (!isset($_SESSION['username'])) {
+    header("Location: loginadmin.php");
+    exit();
+}
+
 if($koneksi===false)
 {
 	die("connection error");
@@ -12,13 +20,12 @@ $result = mysqli_query($koneksi, $sql);
 ?>
 
 
-
 <!doctype html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>Dashboard | Sistem Informasi Pensiun</title>
+      <title>Data Pensiun | Sistem Informasi Pensiun</title>
       
       <!-- Favicon -->
       <link rel="shortcut icon" href="assets/images/favicon.ico" />
@@ -43,10 +50,10 @@ $result = mysqli_query($koneksi, $sql);
       
       <!-- RTL Css -->
       <link rel="stylesheet" href="assets/css/rtl.min.css"/>
-      
+
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" />
       <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.bootstrap5.css" />
-      
+
       
       
   </head>
@@ -209,21 +216,21 @@ $result = mysqli_query($koneksi, $sql);
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="loginadmin.php">Logout</a></li>
+                    <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                   </ul>
                 </li>
               </ul>
             </div>
           </div>
-        </nav>  
+        </nav>          <!-- Nav Header Component Start -->
           <div class="iq-navbar-header" style="height: 215px;">
               <div class="container-fluid iq-container">
                   <div class="row">
                       <div class="col-md-12">
                           <div class="flex-wrap d-flex justify-content-between align-items-center">
                               <div>
-                                  <h1>Data Pensiun</h1>
-                                  <p>Bergerak Maju dengan Keyakinan: Data Pensiun sebagai Navigasi Utama Anda</p>
+                                <h1>Data Pensiun</h1>
+                                 <p>Bergerak Maju dengan Keyakinan: Data Pensiun sebagai Navigasi Utama Anda</p>
                               </div>
 
                           </div>
@@ -241,7 +248,6 @@ $result = mysqli_query($koneksi, $sql);
           </div>          <!-- Nav Header Component End -->
         <!--Nav End-->
       </div>
-
       <h2 class="text-center mt-5">Data Pensiun</h2>
       <div class="container-fluid w-75">
       <table id="example" class="table table-striped" style="width:100%">
@@ -289,8 +295,6 @@ $result = mysqli_query($koneksi, $sql);
 
 
     </table>
-      </div>
-  
 
 
  </main>
@@ -326,16 +330,17 @@ $result = mysqli_query($koneksi, $sql);
     
     <!-- AOS Animation Plugin-->
     <script src="assets/vendor/aos/dist/aos.js"></script>
+    
+    <!-- App Script -->
+    <script src="assets/js/hope-ui.js" defer></script>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.3/js/dataTables.bootstrap5.js"></script>
     <script>
 new DataTable('#example');
     </script>
-    <!-- App Script -->
-    <script src="assets/js/hope-ui.js" defer></script>
+
     
   </body>
 </html>

@@ -1,3 +1,20 @@
+<?php 
+include "./database.php";
+
+session_start();
+
+// Jika pengguna belum login, arahkan kembali ke halaman login
+if (!isset($_SESSION['username'])) {
+    header("Location: loginadmin.php");
+    exit();
+}
+
+if($koneksi===false)
+{
+	die("connection error");
+}
+
+?>
 
 <!doctype html>
 <html lang="en" dir="ltr">
@@ -123,7 +140,8 @@
                 <!-- Sidebar Menu End -->        </div>
         </div>
         <div class="sidebar-footer"></div>
-    </aside>    <main class="main-content">
+    </aside>    
+    <main class="main-content">
       <div class="position-relative iq-banner">
         <!--Nav Start-->
         <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar">
